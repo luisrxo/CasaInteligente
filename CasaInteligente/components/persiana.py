@@ -1,4 +1,33 @@
-from CasaInteligente.components.led import LED
+from gpiozero import Motor
+from time import sleep
 
-class Persiana(LED):
-    pass
+class Persiana(object):
+    
+    def __init__(self,forward_pin_gpio, backward_pin_gpio, name="GPIO", open_direction_backward=True, time_open=5):
+        self.motor = Motor(forward=4,backward=14)
+        self.name = name if name != "GPIO" else "GPIO " + "{},{}".format(forward_pin_gpio,backward_pin_gpio)
+        self.open_direction_backward = open_direction_backward
+        self.time_open = time_open
+    
+    def open(self):
+        if open_direction_backward:
+            self.motor.backward()
+        else:
+            self.motor.forward()
+        sleep(self.time_open)
+
+    def close(self):
+        if open_direction_backward:
+            self.motor.forward() 
+        else:
+            self.motor.backward()
+        sleep(self.time_open)
+
+    def on(self):
+        self.open()
+    
+    def off(self):
+        self.close()
+     
+        
+
