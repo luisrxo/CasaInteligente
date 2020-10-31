@@ -1,0 +1,7 @@
+pyTelegramBotAPI
+ujson
+py==1.4.29
+pytest==3.0.2
+requests==2.20.0
+wheel==0.24.0
+redis==redis>=3.4.1
