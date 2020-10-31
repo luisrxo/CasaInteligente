@@ -29,26 +29,43 @@ class LED(object):
             sleep(inter_blink)
     
     def on_time(self,time_on):
+        """
+        Se queda prendido un cierto tiempo determinado por time on
+
+        Args:
+            time_on (float): Tiempo que estara prendido el LED.
+        """        
         self.GPIO.on()
         sleep(time_on)
         self.GPIO.off()
 
 
     def set_light_sensor(self,sensor):
+        """
+        Establece el dispositivo para sensar.
+
+        Args:
+            sensor (LightSensor): Sensor con el que se trabajara
+        """        
         self.light_sensor = sensor
         self.light_sensor_enable = False
         self.sensors.append(sensor)
     
-    def use_light_sensor(self, turn_on_when_dark = True, use_pwm=False):
+    def use_light_sensor(self, use_pwm=False, on_range=(0.5,1)):
+        """
+        Utiliza el sensor de forma indeterminada con los valores que se le hayan asignado.
+
+        Args:
+            use_pwm (bool, optional): Si se requiere que el valor del LED dependa completamente del sensor de luz. Defaults to False.
+            on_range (tuple, optional): Rango en el que estara encendido el LED. Defaults to (0.5,1).
+        """        
         self.light_sensor_enable = True
         while self.light_sensor_enable:
             if not use_pwm:
-                if turn_on_when_dark:
-                    self.light_sensor.when_dark = self.GPIO.on()
-                    self.light_sensor.when_light = self.GPIO.off()
+                if on_range[0]<= self.light_sensor.value <= on_range[1]:
+                    self.on()
                 else:
-                    self.light_sensor.when_dark = self.GPIO.off()
-                    self.light_sensor.when_light = self.GPIO.on() 
+                    self.off()
             else:
                 self.GPIO.source = self.light_sensor
 
