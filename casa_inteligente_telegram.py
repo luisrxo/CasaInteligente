@@ -1,14 +1,19 @@
 from CasaInteligente.services.telegram_api import Telegram
-from CasaInteligente.components import foco,persiana,alarma,tira_led
+from CasaInteligente.components.alarma import Alarma
+from CasaInteligente.components.foco import Foco
+from CasaInteligente.components.persiana import Persiana
+from CasaInteligente.components.tira_led import TiraLED
 import telebot
 
-alarma_obj = alarma.Alarma(0,"alarma")
-persiana_obj = persiana.Persiana(1,"persiana")
-foco_obj = foco.Foco(2,"foco")
-tira_led_obj = tira_led.TiraLED(3,"tira_led") 
+alarma_obj = Alarma(0,"alarma")
+persiana_obj = Persiana(1,"persiana")
+foco_obj = Foco(2,"foco")
+tira_led_obj = TiraLED(3,"tira_led") 
 dispositivos = [alarma_obj, persiana_obj, foco_obj, tira_led_obj]
 
-bot_enc = telebot.TeleBot("1088193438:AAFffJIzdeGBWtSZhzDCeoYTlkDK2O_Naq4")
+API_TOKEN = "1088193438:AAFffJIzdeGBWtSZhzDCeoYTlkDK2O_Naq4"
+
+bot_enc = telebot.TeleBot(API_TOKEN)
 
 bot_encendido = Telegram("Encendido", bot_enc)
 bot_encendido.set_elements(dispositivos)

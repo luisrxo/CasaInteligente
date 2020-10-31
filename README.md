@@ -14,12 +14,15 @@ pip3 install -r requirements.txt
 
 ```python
 from CasaInteligente.services.telegram_api import Telegram
-from CasaInteligente.components import foco,persiana,alarma,tira_led
+from CasaInteligente.components.alarma import Alarma
+from CasaInteligente.components.foco import Foco
+from CasaInteligente.components.persiana import Persiana
+from CasaInteligente.components.tira_led import TiraLED
 
-alarma_obj = alarma.Alarma(0,"alarma")
-persiana_obj = persiana.Persiana(1,"persiana")
-foco_obj = foco.Foco(2,"foco")
-tira_led_obj = tira_led.TiraLED(3,"tira_led") 
+alarma_obj = Alarma(0,"alarma")
+persiana_obj = Persiana(1,"persiana")
+foco_obj = Foco(2,"foco")
+tira_led_obj = TiraLED(3,"tira_led") 
 
 foco.obj.on()
 ```

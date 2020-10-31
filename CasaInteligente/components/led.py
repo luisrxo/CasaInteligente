@@ -7,6 +7,7 @@ class LED(object):
         self.GPIO = PWMLED(pin_gpio)
         self.name = name if name != "GPIO" else "GPIO " + str(pin_gpio)
         self.set_blink = False
+        self.sensors = []
 
     def on(self):
         self.GPIO.on()
@@ -31,4 +32,25 @@ class LED(object):
         self.GPIO.on()
         sleep(time_on)
         self.GPIO.off()
+
+
+    def set_light_sensor(self,sensor):
+        self.light_sensor = sensor
+        self.light_sensor_enable = False
+        self.sensors.append(sensor)
+    
+    def use_light_sensor(self, turn_on_when_dark = True, use_pwm=False):
+        self.light_sensor_enable = True
+        while self.light_sensor_enable:
+            if not use_pwm:
+                if turn_on_when_dark:
+                    self.light_sensor.when_dark = self.GPIO.on()
+                    self.light_sensor.when_light = self.GPIO.off()
+                else:
+                    self.light_sensor.when_dark = self.GPIO.off()
+                    self.light_sensor.when_light = self.GPIO.on() 
+            else:
+                self.GPIO.source = self.light_sensor
+
+
 
