@@ -14,7 +14,9 @@ def set_foco():
 
 def set_persiana():
     persiana = Persiana(19,26,name="persiana")
-    persiana.open()
+    while 1:
+        persiana.open()
+
 def main():
     set_persiana()
 
