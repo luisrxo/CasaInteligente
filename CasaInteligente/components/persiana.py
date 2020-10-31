@@ -10,14 +10,14 @@ class Persiana(object):
         self.time_open = time_open
     
     def open(self):
-        if open_direction_backward:
+        if self.open_direction_backward:
             self.motor.backward()
         else:
             self.motor.forward()
         sleep(self.time_open)
 
     def close(self):
-        if open_direction_backward:
+        if self.open_direction_backward:
             self.motor.forward() 
         else:
             self.motor.backward()
