@@ -51,7 +51,7 @@ class LED(object):
         self.light_sensor_enable = False
         self.sensors.append(sensor)
     
-    def use_light_sensor(self, use_pwm=False, on_range=(0.5,1)):
+    def use_light_sensor(self, use_pwm=False, on_range=(0.5,1), debug=False):
         """
         Utiliza el sensor de forma indeterminada con los valores que se le hayan asignado.
 
@@ -61,8 +61,10 @@ class LED(object):
         """        
         self.light_sensor_enable = True
         while self.light_sensor_enable:
+            if debug:
+                print(self.light_sensor.value)
             if not use_pwm:
-                if on_range[0]<= self.light_sensor.value <= on_range[1]:
+                if on_range[0]<= self.light_sensor.value and self.light_sensor.value <= on_range[1]:
                     self.on()
                 else:
                     self.off()

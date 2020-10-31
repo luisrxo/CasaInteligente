@@ -7,7 +7,7 @@ from gpiozero import LightSensor
 def main():
     foco = Foco(2,"foco")
     foco.set_light_sensor(LightSensor(21))
-    foco.use_light_sensor()
+    foco.use_light_sensor(debug=True)
 
 
 if __name__ == "__main__":
