@@ -4,7 +4,7 @@ from time import sleep
 class Persiana(object):
     
     def __init__(self,forward_pin_gpio, backward_pin_gpio, name="GPIO", open_direction_backward=True, time_open=5):
-        self.motor = Motor(forward=4,backward=14)
+        self.motor = Motor(forward=forward_pin_gpio,backward=backward_pin_gpio)
         self.name = name if name != "GPIO" else "GPIO " + "{},{}".format(forward_pin_gpio,backward_pin_gpio)
         self.open_direction_backward = open_direction_backward
         self.time_open = time_open
