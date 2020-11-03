@@ -4,6 +4,13 @@ from math import ceil
 
 class LED(object):
     def __init__(self,pin_gpio, name="GPIO"):
+        """
+        Constructor del objeto LED
+
+        Args:
+            pin_gpio (int): pin GPIO donde va a estar conectado el dispositivo.
+            name (str, optional): Nombre con el que se mostrará el dispositivo en los diferentes servicios implementados. Defaults to "GPIO".
+        """        
         self.GPIO = PWMLED(pin_gpio)
         self.name = name if name != "GPIO" else "GPIO " + str(pin_gpio)
         self.set_blink = False
