@@ -3,6 +3,7 @@ from CasaInteligente.components.alarma import Alarma
 from CasaInteligente.components.foco import Foco
 from CasaInteligente.components.persiana import Persiana
 from CasaInteligente.components.tira_led import TiraLED
+from CasaInteligente.components.led import LED
 import telebot
 
 """
@@ -17,9 +18,9 @@ Ejemplo
 Y asi con off
 """
 
-
+# Para todos los Dispositivos que heredan de LED que aqui son todos en el constructor se le pasa el pin GPIO y el nombre
 alarma_obj = Alarma(0,"alarma")
-persiana_obj = Persiana(1,"persiana")
+persiana_obj = LED(1,"persiana")
 foco_obj = Foco(2,"foco")
 tira_led_obj = TiraLED(3,"tira_led") 
 dispositivos = [alarma_obj, persiana_obj, foco_obj, tira_led_obj]

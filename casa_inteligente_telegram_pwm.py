@@ -3,6 +3,7 @@ from CasaInteligente.components.alarma import Alarma
 from CasaInteligente.components.foco import Foco
 from CasaInteligente.components.persiana import Persiana
 from CasaInteligente.components.tira_led import TiraLED
+from CasaInteligente.components.led import LED
 import telebot
 
 """
@@ -13,14 +14,15 @@ tambien incluye los comandos
 /help que mostrara ayuda con los comandos disponibles y sus ejemplos.
 /show muestra los dispositivos que con los que se puede interactuar.
 """
-
+# Para todos los Dispositivos que heredan de LED que aqui son todos en el constructor se le pasa el pin GPIO y el nombre
 alarma_obj = Alarma(0,"alarma")
-persiana_obj = Persiana(1,"persiana")
+# Se toma como un LED normal ya que actualmente se encuentra implementada la parte de la persiana como un MOTOR. 
+persiana_obj = LED(1,"persiana")
 foco_obj = Foco(2,"foco")
 tira_led_obj = TiraLED(3,"tira_led") 
 dispositivos = [alarma_obj, persiana_obj, foco_obj, tira_led_obj]
 
-API_TOKEN = "1088193438:AAFffJIzdeGBWtSZhzDCeoYTlkDK2O_Naq4"
+API_TOKEN = "1483085558:AAER06Yd9L4CRWb8IIA-gAJnF5uD0MbZ3sw"
 
 bot_enc = telebot.TeleBot(API_TOKEN)
 

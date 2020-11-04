@@ -28,6 +28,3 @@ class Persiana(object):
     
     def off(self):
         self.close()
-     
-        
-
