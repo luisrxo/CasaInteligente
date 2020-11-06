@@ -2,6 +2,7 @@ from CasaInteligente.components.buzzer import Buzzer
 from CasaInteligente.components.sensor_pir import SensorPIR
 from CasaInteligente.components.alarma_movimiento import AlarmaMov
 from CasaInteligente.services.telegram_api import Telegram
+from threading import Thread
 import telebot
 
 API_TOKEN = "1088193438:AAFffJIzdeGBWtSZhzDCeoYTlkDK2O_Naq4"
@@ -28,7 +29,10 @@ def command_ledon(message):
     
 @bot_enc.message_handler(commands=['off'])
 def command_ledoff(message):
-    response = bot_alarma.command_off(message)
+    on = Thread(target=bot_alarma.command_off,args=(message))
+    on.start()
+    response = ""
+    #response = bot_alarma.command_off(message)
     bot_enc.reply_to(message, response)
 
 @bot_enc.message_handler(commands=['help','start'])
