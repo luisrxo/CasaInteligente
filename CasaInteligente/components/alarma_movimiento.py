@@ -9,13 +9,15 @@ class AlarmaMov(object):
 
     def use(self):
         self.active = True
+        if type(self.out_devices) != type(list()):
+            self.out_devices = [self.out_devices]
         while self.active:
             if self.in_device.is_move():
-                if type(self.out_devices) != type(list()):
-                    self.out_devices = [self.out_devices]
                 for device in self.out_devices:
                     device.on()
-
+            else:
+                for device in self.out_devices:
+                        device.off()
     def on(self):
         self.use()
 

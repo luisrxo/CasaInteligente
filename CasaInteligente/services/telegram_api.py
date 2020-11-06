@@ -190,3 +190,6 @@ class Telegram(object):
 
     def on(self):
         self.send_message()
+
+    def off(self):
+        pass
