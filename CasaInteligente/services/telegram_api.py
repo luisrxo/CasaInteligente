@@ -26,7 +26,7 @@ class Telegram(object):
         for command_text in self.commands.values():
             text.append(command_text["message"])
             text.append(command_text["example"])
-        return init_message + "\n" + "\n".join(text)
+        return self.init_message + "\n" + "\n".join(text)
 
     def add_action_message(self,command, message, example):
         self.commands[command] = {"message": message, "example": example}

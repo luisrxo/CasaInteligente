@@ -17,7 +17,6 @@ bot_alarma.set_on_message("Se ha Detectado movimiento")
 bot_alarma.set_elements([alarma])
 bot_alarma.add_action_message("\on","\nEnciende el/los dispositivos seleccionados","\n\on alarma,foco")
 bot_alarma.add_action_message("\off","\nApaga el/los dispositivos seleccionados","\n\off alarma,foco")
-#bot_encendido.add_action_message("\setvalue","\nEstablece el valor PWM al seleccionado","\n\setvalue alarma 0.5")
 bot_alarma.add_action_message("\show","\nMuestra los dispositivos que se encuentran activados","\show")
 
 @bot_enc.message_handler(commands=['on'])
