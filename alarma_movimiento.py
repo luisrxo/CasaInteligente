@@ -10,7 +10,7 @@ bot_enc = telebot.TeleBot(API_TOKEN)
 buzzer = Buzzer(26,name="Buzzer")
 sensor = SensorPIR(21,name="Sensor Movimiento")
 bot_alarma= Telegram("Encendido", bot_enc)
-alarma = AlarmaMov([buzzer,bot_alarma],sensor,name="Alarma Mov")
+alarma = AlarmaMov([buzzer,bot_alarma],sensor,name="Alarma_Mov")
 
 bot_alarma.set_on_message("Se ha Detectado movimiento")
 
