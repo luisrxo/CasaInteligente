@@ -29,10 +29,7 @@ def command_ledon(message):
     
 @bot_enc.message_handler(commands=['off'])
 def command_ledoff(message):
-    on = Thread(target=bot_alarma.command_off,args=(message))
-    on.start()
-    response = ""
-    #response = bot_alarma.command_off(message)
+    response = bot_alarma.command_off(message)
     bot_enc.reply_to(message, response)
 
 @bot_enc.message_handler(commands=['help','start'])
