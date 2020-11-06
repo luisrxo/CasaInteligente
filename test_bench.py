@@ -18,9 +18,7 @@ def set_persiana():
 
 def main():
     set_persiana()
-
-    
-
+    set_foco()
 
 if __name__ == "__main__":
     main()
