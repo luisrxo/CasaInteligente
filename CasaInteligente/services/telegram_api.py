@@ -178,3 +178,15 @@ class Telegram(object):
         correct_command = re.search(command+regex,texto)
         if not correct_command:
             raise Exception("El mensaje enviado no coincide con lo que se esperaba "+ self.commands[command]["example"]) if command in self.commands.keys() else ""
+
+    def set_chat(self,chat_id):
+        self.chat_id = chat_id
+
+    def set_on_message(self,message):
+        self.on_message = message
+
+    def send_message(self):
+        self.bot.send_message(self.chat_id,self.on_message)
+
+    def on(self):
+        self.send_message()
