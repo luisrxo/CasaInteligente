@@ -180,16 +180,37 @@ class Telegram(object):
             raise Exception("El mensaje enviado no coincide con lo que se esperaba "+ self.commands[command]["example"]) if command in self.commands.keys() else ""
 
     def set_chat(self,chat_id):
+        """
+        Se setea el chat al cual se le va a enviar un mensaje
+
+        Args:
+            chat_id (int): Chat Id de telegram
+        """        
         self.chat_id = chat_id
 
     def set_on_message(self,message):
+        """
+        Se establece el mensaje cuando se activa el metodo on
+
+        Args:
+            message (str): Mensaje a mandar
+        """        
         self.on_message = message
 
     def send_message(self):
+        """
+        Wrapper para  mandar un mensaje a través del bot
+        """        
         self.bot.send_message(self.chat_id,self.on_message)
 
     def on(self):
+        """
+        Wrapper para que cuando se encienda el dispositivo de salida, mande un mensaje.
+        """        
         self.send_message()
 
     def off(self):
+        """
+        Wrapper para que cuando se apague este dispositivo, no se hace nada ya que el chat sigue abierto y no se necesita enviar mensaje
+        """        
         pass

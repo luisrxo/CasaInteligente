@@ -55,11 +55,5 @@ def send_welcome(message):
 def command_show(message):
     response = bot_encendido.command_show(message)
     bot_enc.reply_to(message, response)
-"""
-@bot_enc.message_handler(commands=['setvalue'])
-def command_show(message):
-    response = bot_encendido.command_set_value(message)
-    bot_enc.reply_to(message, response)
-"""
 
 bot_enc.polling()
