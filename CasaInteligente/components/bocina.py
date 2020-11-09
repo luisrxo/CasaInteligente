@@ -12,10 +12,9 @@ class Bocina(object):
         self.path = path
         pygame.mixer.init()
         pygame.mixer.music.load(path)
-        self.playing = False
 
     def on(self):
         Thread(target=play_sound).start()
 
     def off(self):
-        self.mixer.music.stop()
+        pygame.mixer.music.stop()

@@ -8,8 +8,7 @@ import telebot
 API_TOKEN = "1088193438:AAFffJIzdeGBWtSZhzDCeoYTlkDK2O_Naq4"
 bot_enc = telebot.TeleBot(API_TOKEN)
 # Se crean los dispositivos a usar, en este caso se tiene
-# Buzzer, al tener un funcionamiento similar a un LED, tiene las mismas funcionalidades. 
-# Dado que el buzzer que tengo no funciona se utilizó un LED
+# Bocina, se utiliza pygame para reproducir el sonido. 
 bocina = Bocina("alarm_sound.mp3",name="Bocina")
 # Se define el sensor que servirá como entrada a la alarma, en este caso es un PIR
 sensor = SensorPIR(21,name="Sensor Movimiento")
