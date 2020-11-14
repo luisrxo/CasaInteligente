@@ -1,7 +1,5 @@
-from CasaInteligente.components.alarma import Alarma
 from CasaInteligente.components.foco import Foco
 from CasaInteligente.components.persiana import Persiana
-from CasaInteligente.components.tira_led import TiraLED
 from gpiozero import LightSensor
 
 from threading import Thread
@@ -17,8 +15,7 @@ def set_persiana():
     persiana.open()
 
 def main():
-    set_persiana()
-    set_foco()
-
+    Thread(target=set_persiana).start()
+    Thread(target=set_foco).start()
 if __name__ == "__main__":
     main()
