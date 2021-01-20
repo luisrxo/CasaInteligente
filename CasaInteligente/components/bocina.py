@@ -26,8 +26,8 @@ class Bocina(object):
         """        
         self.name = name
         self.path = path
-        pygame.mixer.init()
-        pygame.mixer.music.load(path)
+        #pygame.mixer.init()
+        #pygame.mixer.music.load(path)
 
     def on(self):
         """
