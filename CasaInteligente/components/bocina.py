@@ -1,5 +1,11 @@
 import pygame
 from threading import Thread
+from youtube_dl import YoutubeDL
+from youtubesearchpython import VideosSearch
+import sys
+import os
+import time
+
 
 def play_sound():
     pygame.mixer.music.play()
@@ -34,3 +40,41 @@ class Bocina(object):
         Detiene la reproducción
         """        
         pygame.mixer.music.stop()
+
+    def search(self, query):
+        query = "tusa"
+        videosSearch = VideosSearch(query, limit=1)
+        result = videosSearch.result()
+        url = result["result"][0]["link"]
+        name = result["result"][0]["title"]
+        return url, name 
+
+    def download_video(self, url):
+        audio_downloder = YoutubeDL({'format':'bestaudio'})
+        audio_downloder.download([url])
+        path = "KAROL G, Nicki Minaj - Tusa (Official Video)-tbneQDc2H3I.webm"
+        return
+
+    def video_to_mp3(self, file_name):
+        """ Transforms video file into a MP3 file """
+        try:
+            file, extension = os.path.splitext(file_name)
+            # Convert video into .wav file
+            os.system('ffmpeg -i {file}{ext} {file}.wav'.format(file=file, ext=extension))
+            # Convert .wav into final .mp3 file
+            os.system('lame {file}.wav {file}.mp3'.format(file=file))
+            os.remove('{}.wav'.format(file))  # Deletes the .wav file
+            print('"{}" successfully converted into MP3!'.format(file_name))
+        except OSError as err:
+            print(err.reason)
+            return
+
+
+    def play(self,query):
+        url,name = self.search(query)
+        self.download_video(url)
+        self.video_to_mp3(name + ".webm")
+        pygame.mixer.init()
+        pygame.mixer.music.load(name+".mp3")
+        self.on()
+        return
