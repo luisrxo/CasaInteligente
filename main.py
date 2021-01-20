@@ -25,13 +25,13 @@ dispositivos = [bocina_obj, persiana_obj, foco_obj, tira_led_obj]
 
 API_TOKEN = "1088193438:AAFffJIzdeGBWtSZhzDCeoYTlkDK2O_Naq4"
 bot_enc = telebot.TeleBot(API_TOKEN)
-bot_encendido = Telegram("Encendido", bot_enc)
+bot_encendido = Telegram("Casa Inteligente", bot_enc)
 bot_encendido.set_elements(dispositivos)
-bot_encendido.add_action_message("\on","\nEnciende el/los dispositivos seleccionados","\n\on alarma,foco")
-bot_encendido.add_action_message("\off","\nApaga el/los dispositivos seleccionados","\n\off alarma,foco")
-bot_encendido.add_action_message("\play","\nReproduce una cancion dada por el usuario","\n\play im so tired the beatles 2018")
-bot_encendido.add_action_message("\setvalue","\nEstablece el valor PWM al seleccionado","\n\setvalue alarma 0.5")
-bot_encendido.add_action_message("\show","\nMuestra los dispositivos que se encuentran activados","\show")
+bot_encendido.add_action_message("/on","\nEnciende el/los dispositivos seleccionados","\n/on alarma,foco")
+bot_encendido.add_action_message("/off","\nApaga el/los dispositivos seleccionados","\n/off alarma,foco")
+bot_encendido.add_action_message("/play","\nReproduce una cancion dada por el usuario","\n/play im so tired the beatles 2018")
+bot_encendido.add_action_message("/setvalue","\nEstablece el valor PWM al seleccionado","\n/setvalue alarma 0.5")
+bot_encendido.add_action_message("/show","\nMuestra los dispositivos que se encuentran activados","/show")
 
 @bot_enc.message_handler(commands=['on'])
 def command_ledon(message):

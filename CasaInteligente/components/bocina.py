@@ -52,12 +52,12 @@ class Bocina(object):
     def download_video(self, url):
         audio_downloder = YoutubeDL({'format':'bestaudio', 'outtmpl': 'download.webm'})
         audio_downloder.download([url])
-        path = "KAROL G, Nicki Minaj - Tusa (Official Video)-tbneQDc2H3I.webm"
         return
 
     def video_to_mp3(self, file_name):
         """ Transforms video file into a MP3 file """
         try:
+            os.remove("{file}{ext}".format(file=file,ext=".wav"))
             file, extension = os.path.splitext(file_name)
             # Convert video into .wav file
             inst = 'ffmpeg -i {file}{ext} {file}.wav'.format(file=file, ext=extension)
