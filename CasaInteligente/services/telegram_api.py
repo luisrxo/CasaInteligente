@@ -104,6 +104,7 @@ class Telegram(object):
 
     def command_play(self,message):
         return_message = "Hola " + self.get_full_name(message)
+        message = message.text.replace("/play", "")
         song_name = self.disps["bocina"].play(message)
         return_message += "Se va a reproducir " + song_name
         return return_message
