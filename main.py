@@ -17,7 +17,7 @@ Y asi con off
 """
 
 # Para todos los Dispositivos que heredan de LED que aqui son todos en el constructor se le pasa el pin GPIO y el nombre
-persiana_obj = Persiana(1,"persiana")
+persiana_obj = Persiana(5, 6, name="persiana", open_direction_backward=True, time_open=5)
 foco_obj = Foco(2,"foco")
 tira_led_obj = TiraLED(3,"tira_led") 
 bocina_obj = Bocina("","bocina")
