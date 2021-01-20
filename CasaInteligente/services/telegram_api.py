@@ -102,6 +102,12 @@ class Telegram(object):
         return_message += "Se han encedido el\los dispositivos " + disps
         return return_message
 
+    def command_play(self,message):
+        return_message = "Hola " + self.get_full_name(message)
+        song_name = self.disps["bocina"].play(message)
+        return_message += "Se va a reproducir " + song_name
+        return return_message
+
     def command_off(self,message):
         return_message = "Hola " + self.get_full_name(message)
         try:

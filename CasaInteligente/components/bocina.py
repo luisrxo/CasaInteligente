@@ -46,7 +46,8 @@ class Bocina(object):
         videosSearch = VideosSearch(query, limit=1)
         result = videosSearch.result()
         url = result["result"][0]["link"]
-        return url
+        name = result["result"][0]["title"]
+        return url, name
 
     def download_video(self, url):
         audio_downloder = YoutubeDL({'format':'bestaudio', 'outtmpl': 'download.webm'})
@@ -69,12 +70,13 @@ class Bocina(object):
             print(err.reason)
             return
 
+
     def play(self,query):
-        url = self.search(query)
+        url, video_name = self.search(query)
         name = "download"
         self.download_video(url)
         self.video_to_mp3(name + ".webm")
         pygame.mixer.init()
         pygame.mixer.music.load(name+".wav")
         self.on()
-        return
+        return video_name
