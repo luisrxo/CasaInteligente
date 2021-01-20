@@ -42,7 +42,6 @@ class Bocina(object):
         pygame.mixer.music.stop()
 
     def search(self, query):
-        query = "tusa"
         videosSearch = VideosSearch(query, limit=1)
         result = videosSearch.result()
         url = result["result"][0]["link"]
