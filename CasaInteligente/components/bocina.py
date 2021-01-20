@@ -46,11 +46,10 @@ class Bocina(object):
         videosSearch = VideosSearch(query, limit=1)
         result = videosSearch.result()
         url = result["result"][0]["link"]
-        name = result["result"][0]["title"]
-        return url, name 
+        return url
 
     def download_video(self, url):
-        audio_downloder = YoutubeDL({'format':'bestaudio'})
+        audio_downloder = YoutubeDL({'format':'bestaudio', 'outtmpl': 'download.webm'})
         audio_downloder.download([url])
         path = "KAROL G, Nicki Minaj - Tusa (Official Video)-tbneQDc2H3I.webm"
         return
@@ -60,21 +59,22 @@ class Bocina(object):
         try:
             file, extension = os.path.splitext(file_name)
             # Convert video into .wav file
-            os.system('ffmpeg -i {file}{ext} {file}.wav'.format(file=file, ext=extension))
+            inst = 'ffmpeg -i {file}{ext} {file}.wav'.format(file=file, ext=extension)
+            os.system(inst)
             # Convert .wav into final .mp3 file
-            os.system('lame {file}.wav {file}.mp3'.format(file=file))
-            os.remove('{}.wav'.format(file))  # Deletes the .wav file
-            print('"{}" successfully converted into MP3!'.format(file_name))
+            #os.system('lame {file}.wav {file}.mp3'.format(file=file))
+            #os.remove('{}.wav'.format(file))  # Deletes the .wav file
+            print('"{}" successfully converted into WAV!'.format(file_name))
         except OSError as err:
             print(err.reason)
             return
 
-
     def play(self,query):
-        url,name = self.search(query)
+        url = self.search(query)
+        name = "download"
         self.download_video(url)
         self.video_to_mp3(name + ".webm")
         pygame.mixer.init()
-        pygame.mixer.music.load(name+".mp3")
+        pygame.mixer.music.load(name+".wav")
         self.on()
         return
