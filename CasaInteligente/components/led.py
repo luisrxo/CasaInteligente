@@ -90,7 +90,7 @@ class LED(object):
 
     def turn_off_sensor(self):
         global light_sensor_enable   
-        light_sensor_enable = True
+        light_sensor_enable = False
         return
 
     def turn_on_sensor(self):
