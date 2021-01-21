@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import pygame
 from threading import Thread
 from youtube_dl import YoutubeDL
@@ -85,3 +86,5 @@ class Bocina(object):
         pygame.mixer.music.load(name+".wav")
         self.on()
         return video_name
+=======
+>>>>>>> ulises_dev
