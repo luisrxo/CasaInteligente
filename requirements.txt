@@ -5,3 +5,9 @@ pytest==3.0.2
 requests==2.20.0
 wheel==0.24.0
 redis==redis>=3.4.1
+bluedot
+wave
+pygame
+youtube_dl
+youtubesearchpython
+telebot
