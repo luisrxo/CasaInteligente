@@ -1,5 +1,5 @@
 from __future__ import print_function
-
+#bibliotecas para google assistant
 import argparse
 import os.path
 import json
@@ -8,20 +8,20 @@ import google.oauth2.credentials
 from google.assistant.library import Assistant
 from google.assistant.library.event import EventType
 from google.assistant.library.file_helpers import existing_file
-
+#bibliotecas de los dispositivos finales
 from CasaInteligente.components.foco import Foco
 from CasaInteligente.components.persiana import Persiana
 from CasaInteligente.components.tira_led import TiraLED
 from CasaInteligente.components.bocina import Bocina
 from gpiozero import LightSensor
-
+#instancias de los dispositivos
 persiana_obj = Persiana(26, 19, name="persiana", open_direction_backward=True, time_open=5)
 foco_obj = Foco(2,"foco")
 foco_obj.set_light_sensor(LightSensor(21))
 #foco_obj.use_light_sensor(debug=True)
 tira_led_obj = TiraLED(3,"tira_led") 
 bocina_obj = Bocina("","bocina")
-
+#funciones de reconocimiento
 def process_event(event):
     """Pretty prints events.
     Prints all events that occur with two spaces between each new
@@ -52,43 +52,43 @@ def process_event(event):
 
     """
     
-
+#reconocomiento de comando para encender iluminación principal
     command_led = "turn on lights"
     if (event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED) and event.args["text"] == command_led:
         foco_obj.on()
-    
+ #reconocimiento de comando para apagar la iluminación principal   
     command_off = "turn off lights"
     if (event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED) and event.args["text"] == command_off:
         foco_obj.off()
-    
+ ## comando para abrir las persianas   
     command_blid_open = "open the blinds"
     if (event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED) and event.args["text"] == command_blid_open:
         persiana_obj.open()
-
+#comando para cerrar las persianas
     command_blind_close = "close the blinds"
     if (event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED) and event.args["text"] == command_blind_close:
         persiana_obj.off()
-
+#comando para encender la tira led
     command_on_strip = "turn on strip"
     if (event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED) and event.args["text"] == command_on_strip:
         tira_led_obj.on()
-
+#comando para pagar la tira led
     command_off_strip = "turn off strip"
     if (event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED) and event.args["text"] == command_off_strip:
         tira_led_obj.off()
-
+#comando para activar el sensor de luz
     command_use_light_sensor = "use the light sensor"
     if (event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED) and event.args["text"] == command_use_light_sensor:
         tira_led_obj.turn_on_sensor()
-
+#comando para poner musica
     command_play = "play"
     if (event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED) and command_play in event.args["text"].lower():
         bocina_obj.play(event.args["text"].lower().replace(command_play,""))
-    
+#comando para detenerla            
     command_stop = "stop"
     if (event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED) and command_stop in event.args["text"].lower():
         bocina_obj.off()
-
+#main que le pasa las credenciales al programa
 def main():
     parser = argparse.ArgumentParser(
         formatter_class=argparse.RawTextHelpFormatter)
