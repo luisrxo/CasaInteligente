@@ -78,6 +78,10 @@ def process_event(event):
     if (event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED) and event.args["text"] == command_off_strip:
         tira_led_obj.off()
 
+    command_use_light_sensor = "use the light sensor"
+    if (event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED) and event.args["text"] == command_use_light_sensor:
+        tira_led_obj.turn_on_sensor()
+
     command_play = "play"
     if (event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED) and command_play in event.args["text"].lower():
         bocina_obj.play(event.args["text"].lower().replace(command_play,""))
@@ -104,7 +108,6 @@ def main():
 
     with Assistant(credentials) as assistant:
         for event in assistant.start():
-            import pdb;pdb.set_trace()
             process_event(event)
 
 
