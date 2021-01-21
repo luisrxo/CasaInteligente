@@ -1,6 +1,22 @@
 from gpiozero import PWMLED
 from time import sleep
 from math import ceil
+from threading import Thread
+
+light_sensor_enable = False
+
+
+def use_sensor(GPIO,led,light_sensor,use_pwm,on_range):
+    while light_sensor_enable:
+        if not use_pwm:
+            if on_range[0]<= light_sensor.value and light_sensor.value <= on_range[1]:
+                led.on()
+            else:
+                led.off()
+        else:
+            GPIO.source = light_sensor
+    return
+
 
 class LED(object):
     def __init__(self,pin_gpio, name="GPIO"):
@@ -53,11 +69,36 @@ class LED(object):
 
         Args:
             sensor (LightSensor): Sensor con el que se trabajara
-        """        
+        """
+        global light_sensor_enable   
         self.light_sensor = sensor
-        self.light_sensor_enable = False
+        light_sensor_enable = False
         self.sensors.append(sensor)
     
+    def use_light_sensor_exp(self, use_pwm=False, on_range=(0.5,1), debug=False):
+        """
+        Utiliza el sensor de forma indeterminada con los valores que se le hayan asignado.
+
+        Args:
+            use_pwm (bool, optional): Si se requiere que el valor del LED dependa completamente del sensor de luz. Defaults to False.
+            on_range (tuple, optional): Rango en el que estara encendido el LED. Defaults to (0.5,1).
+        """    
+        global light_sensor_enable   
+        light_sensor_enable = True
+        Thread(target=use_sensor,args=(self.GPIO,self,self.light_sensor,use_pwm,on_range)).start()
+        return
+
+    def turn_off_sensor(self):
+        global light_sensor_enable   
+        light_sensor_enable = True
+        return
+
+    def turn_on_sensor(self):
+        global light_sensor_enable   
+        light_sensor_enable = True
+        self.use_light_sensor_exp()
+        return
+
     def use_light_sensor(self, use_pwm=False, on_range=(0.5,1), debug=False):
         """
         Utiliza el sensor de forma indeterminada con los valores que se le hayan asignado.
