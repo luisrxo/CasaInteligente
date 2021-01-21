@@ -6,6 +6,9 @@ def play_sound():
     while pygame.mixer.music.get_busy():
         continue
 
+def stop_sound():
+    pygame.mixer.music.stop()
+
 """
 Esta clase es para utilizar el jack 3.5 mm para reproducir sonido
 """
@@ -33,4 +36,11 @@ class Bocina(object):
         """
         Detiene la reproducción
         """        
-        pygame.mixer.music.stop()
+        Thread(target=stop_sound).start()
+        #pygame.mixer.music.stop()
+
+    def get_volume(self):
+        return pygame.mixer.music.get_volume()
+
+    def set_volume(self, volume):
+        pygame.mixer.music.set_volume(volume)
