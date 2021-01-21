@@ -75,7 +75,7 @@ class Bocina(object):
         name = "download"
         self.download_video(url)
         self.video_to_mp3(name + ".webm")
-        pygame.mixer.init()
+        pygame.mixer.init(44100)
         pygame.mixer.music.load(name+".wav")
         self.on()
         return video_name
