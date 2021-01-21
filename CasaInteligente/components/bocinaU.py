@@ -37,10 +37,11 @@ class Bocina(object):
         Detiene la reproducción
         """        
         Thread(target=stop_sound).start()
-        #pygame.mixer.music.stop()
-
+    
+    # Obtiene el volumen de reproducción actual
     def get_volume(self):
         return pygame.mixer.music.get_volume()
 
+    # Asigna el volumen de reproducción
     def set_volume(self, volume):
         pygame.mixer.music.set_volume(volume)
