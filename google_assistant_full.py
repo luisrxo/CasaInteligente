@@ -16,7 +16,7 @@ from CasaInteligente.components.tira_led import TiraLED
 from CasaInteligente.components.bocina import Bocina
 from gpiozero import LightSensor
 
-persiana_obj = Persiana(5, 6, name="persiana", open_direction_backward=True, time_open=5)
+persiana_obj = Persiana(26, 19, name="persiana", open_direction_backward=True, time_open=5)
 foco_obj = Foco(2,"foco")
 foco_obj.set_light_sensor(LightSensor(21))
 #foco_obj.use_light_sensor(debug=True)
@@ -79,9 +79,13 @@ def process_event(event):
         tira_led_obj.off()
 
     command_play = "play"
-    if (event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED) and "play" in event.args["text"].lower():
-        bocina_obj.play(event.args["text"].lower().replace("play",""))
-  
+    if (event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED) and command_play in event.args["text"].lower():
+        bocina_obj.play(event.args["text"].lower().replace(command_play,""))
+    
+    command_stop = "stop"
+    if (event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED) and command_play in event.args["text"].lower():
+        bocina_obj.off()
+
 def main():
     parser = argparse.ArgumentParser(
         formatter_class=argparse.RawTextHelpFormatter)
@@ -100,6 +104,7 @@ def main():
 
     with Assistant(credentials) as assistant:
         for event in assistant.start():
+            import pdb;pdb.set_trace()
             process_event(event)
 
 
