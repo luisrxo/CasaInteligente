@@ -7,3 +7,4 @@ from . import buzzer
 from . import sensor_pir
 from . import bocinaU
 from . import bluetooth
+from . import bocina

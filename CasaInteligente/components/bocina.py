@@ -57,7 +57,8 @@ class Bocina(object):
         """ Transforms video file into a MP3 file """
         try:
             file, extension = os.path.splitext(file_name)
-            os.remove("{file}{ext}".format(file=file,ext=".wav"))
+            if os.path.exists("download.wav"):
+                os.remove("{file}{ext}".format(file=file,ext=".wav"))
             # Convert video into .wav file
             inst = 'ffmpeg -i {file}{ext} {file}.wav'.format(file=file, ext=extension)
             os.system(inst)
