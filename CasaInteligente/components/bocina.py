@@ -73,7 +73,10 @@ class Bocina(object):
     def play(self,query):
         url, video_name = self.search(query)
         name = "download"
-        os.remove("download.webm")
+        try:
+            os.remove("download.webm")
+        except:
+            pass
         self.download_video(url)
         self.video_to_mp3(name + ".webm")
         file_wav = wave.open(name+".wav")
