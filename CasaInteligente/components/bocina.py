@@ -5,7 +5,7 @@ from youtubesearchpython import VideosSearch
 import sys
 import os
 import time
-
+import wave
 
 def play_sound():
     pygame.mixer.music.play()
@@ -73,9 +73,12 @@ class Bocina(object):
     def play(self,query):
         url, video_name = self.search(query)
         name = "download"
+        os.remove("download.webm")
         self.download_video(url)
         self.video_to_mp3(name + ".webm")
-        pygame.mixer.init(44100)
+        file_wav = wave.open(name+".wav")
+        frequency = file_wav.getframerate()
+        pygame.mixer.init(frequency=frequency)
         pygame.mixer.music.load(name+".wav")
         self.on()
         return video_name
