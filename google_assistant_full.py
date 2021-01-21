@@ -79,8 +79,8 @@ def process_event(event):
         tira_led_obj.off()
 
     command_play = "play"
-    if (event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED) and "play" in event.args["text"]:
-        bocina_obj.play(event.args["text"].replace("play",""))
+    if (event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED) and "play" in event.args["text"].lower():
+        bocina_obj.play(event.args["text"].lower().replace("play",""))
   
 def main():
     parser = argparse.ArgumentParser(
