@@ -87,7 +87,7 @@ def process_event(event):
         bocina_obj.play(event.args["text"].lower().replace(command_play,""))
     
     command_stop = "stop"
-    if (event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED) and command_play in event.args["text"].lower():
+    if (event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED) and command_stop in event.args["text"].lower():
         bocina_obj.off()
 
 def main():
