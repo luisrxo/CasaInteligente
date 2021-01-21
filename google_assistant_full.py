@@ -40,7 +40,8 @@ def process_event(event):
             event.args and not event.args['with_follow_on_turn']):
         print()
         #GPIO.output(2,False)
-
+    if (event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED):
+        print(event.args["text"])
     """
     Para Hacer uso del reconocimiento de voz de google, lo que hacemos es ver cuando haya un evento del tipo
     ON_RECOGNIZING_SPEECH_FINISHED, esto traerá en los argumentos del evento, el texto que reconoció. 
@@ -51,6 +52,8 @@ def process_event(event):
     podemos definir cualquier comando y mediante este reconocimiento apagar o encender cosas dentro de nuestra raspberry
 
     """
+    
+
     command_led = "turn on lights"
     if (event.type == EventType.ON_RECOGNIZING_SPEECH_FINISHED) and event.args["text"] == command_led:
         foco_obj.on()
