@@ -1,4 +1,4 @@
-from CasaInteligente.components.bocina import Bocina
+from CasaInteligente.components.bocinaU import Bocina
 from CasaInteligente.components.bluetooth import Bluetooth
 import time
 from threading import Thread
